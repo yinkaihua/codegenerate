@@ -53,7 +53,7 @@ public class CodeGenerateFactory{
 			String sqlMapperPackage = CodeResourceUtil.getConfigInfo("sqlMapper_path");
 			String entityPackage = CodeResourceUtil.getConfigInfo("entity_path")+"."+commonName;
 			String servicePackage = CodeResourceUtil.getConfigInfo("service_path")+"."+commonName;
-			String serviceImpPackage = CodeResourceUtil.getConfigInfo("service_imp_path")+"."+commonName;
+			String serviceImpPackage = servicePackage+".impl.";
 			String daoPackage = CodeResourceUtil.getConfigInfo("dao_path")+"."+commonName;
 			String daoImpPackage = daoPackage+".impl.";
 			
