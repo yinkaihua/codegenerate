@@ -1,24 +1,22 @@
-package com.coding17.easycms.soa.dao.channel.impl;
+package ${daoPackage}.impl;
 
 import org.springframework.stereotype.Repository;
 
 import com.coding17.easycms.soa.base.dao.impl.SuperDAO;
-import com.coding17.easycms.soa.dao.channel.TChannelDAO;
-import com.coding17.easycms.soa.entity.channel.TChannel;
+import ${daoPackage}.${className}DAO;
+import ${entityPackage}.${className};
 
 /**
- * 栏目DAO
- * @Title: TChannelDAOImpl.java 
- * @Package: com.coding17.easycms.soa.dao.channel.impl  
- * @author: yin.kh
- * @date: 2016年1月25日 下午11:14:01
+ * 描述：</b>${codeName}<br>
+ * @author：系统生成
+ * @version:1.0
  */
-@Repository("tChannelDAO")
-public class TChannelDAOImpl extends SuperDAO<TChannel> implements TChannelDAO {
+@Repository
+public class ${className}DAOImpl extends SuperDAO<${className}> implements ${className}DAO {
 
 	@Override
 	protected String getStatementPrefix() {
-		return TChannel.class.getName();
+		return ${className}.class.getName();
 	}
 
 }
