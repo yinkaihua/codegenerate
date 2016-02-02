@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!-- 功能模块: ${codeName} -->
-<mapper namespace="${className}" >
+<mapper namespace="${entityPackage}.${className}" >
 
 	<!--通用表字段列表-->
 	<resultMap id="BaseResultMap" type="${entityPackage}.${className}">
