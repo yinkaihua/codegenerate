@@ -16,12 +16,17 @@ import ${entityPackage}.${className};
  * @version:1.0
  */
 @Repository
-public class ${className}ServiceImpl implements ${className}Service {
+public class ${className}ServiceImpl extends BaseServiceImpl<${className}> implements ${className}Service {
 	
 	@Autowired
 	public ${className}DAO ${lowerName}Dao;
 
 	@SuppressWarnings("unused")
 	private final static Logger log= LoggerFactory.getLogger(${className}ServiceImpl.class);
+	
+	@Override
+	protected ISuperDAO<${className}> getDao() {
+		return ${lowerName}Dao;
+	}
 	
 }
