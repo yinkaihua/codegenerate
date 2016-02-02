@@ -11,7 +11,7 @@ import ${entityPackage}.${className};
  * @author：系统生成
  * @version:1.0
  */
-@Repository
+@Repository("${lowerName}DAO")
 public class ${className}DAOImpl extends SuperDAO<${className}> implements ${className}DAO {
 
 	@Override

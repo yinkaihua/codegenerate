@@ -17,7 +17,7 @@ import ${entityPackage}.${className};
  * @author：系统生成
  * @version:1.0
  */
-@Repository
+@Repository("${lowerName}Service")
 public class ${className}ServiceImpl extends BaseServiceImpl<${className}> implements ${className}Service {
 	
 	@Autowired
