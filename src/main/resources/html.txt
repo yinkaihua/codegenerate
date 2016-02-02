@@ -1,0 +1,10 @@
+<div class="zhy_popa changeLeve2" style="width:450px; margin-left:-231px;">
+<p class="pa">是否确定删除此地址？<span class="shop_close_icon" onclick="hideEdit()"></span></p>
+<div class="pop_content">
+<div class="operate_btn"> 
+  <input id="hiddenProductId" type="hidden"/>
+  <button type="button" class="cancle_yes" id="delAddrOk" onclick="deleteProduct(this);">确定</button>
+  <button type="button" class="cancle_btn" onclick="hideEdit()">取消</button>
+</div>
+</div>
+</div>
