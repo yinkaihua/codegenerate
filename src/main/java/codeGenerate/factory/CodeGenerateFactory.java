@@ -55,9 +55,9 @@ public class CodeGenerateFactory{
 			String serviceImpPackage = CodeResourceUtil.getConfigInfo("service_imp_path");
 			
 			String sqlMapperPath = (new StringBuilder(String.valueOf(sqlMapperPackage.replace(".", "\\")))).append("\\")
-					.append(className).append("EntityMapper.xml").toString();
+					.append(className).append("Mapper.xml").toString();
 			String entityPath = (new StringBuilder(String.valueOf(entityPackage.replace(".", "\\")))).append("\\")
-					.append(className).append("Entity.java").toString();
+					.append(className).append(".java").toString();
 			String servicePath = (new StringBuilder(String.valueOf(servicePackage.replace(".", "\\")))).append("\\")
 					.append(className).append("Service.java").toString();
 			String serviceImpPath = (new StringBuilder(String.valueOf(serviceImpPackage.replace(".", "\\")))).append("\\")
