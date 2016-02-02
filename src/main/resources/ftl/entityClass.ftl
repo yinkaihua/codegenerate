@@ -45,24 +45,6 @@ public class ${className} extends BasicEntity {
 	
 	</#if>
 	</#list>
-	/**
-	 * 获取主键字段
-	 */
-	@Override
-    public String primaryKey() {
-    	if(<#list columnKeyDatas as item><#if item_index==0>${item.domainPropertyName}==null<#else> || ${item.domainPropertyName}==null</#if></#list>){
-    		throw new IllegalArgumentException("${codeName}主键为空!");
-    	}
-    	return <#list columnKeyDatas as item><#if item_index==0>${item.domainPropertyName}.toString()<#else> + ":" + ${item.domainPropertyName}.toString()</#if></#list>;
-    }
-    
-	/**
-	 * 获取实体类名称
-	 */
-	@Override
-    public String className() {
-        return ${className}.class.getName();
-    }
     
     /**
      * 重写toString()

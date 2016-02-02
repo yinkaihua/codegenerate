@@ -31,6 +31,7 @@ public class CodeGenerateFactory{
 			CreateBean createBean = new CreateBean();
 			createBean.setMysqlInfo(url, username, passWord,databaseName);
 			String className = createBean.getTablesNameToClassName(tableName);
+			String commonName = className.substring(1).toLowerCase();
 			String lowerName = (new StringBuilder(String.valueOf(className.substring(0, 1).toLowerCase()))).append(
 					className.substring(1, className.length())).toString();
 			String tableNameUpper = tableName.toUpperCase();
@@ -50,9 +51,11 @@ public class CodeGenerateFactory{
 			String classPathSrc = CodeResourceUtil.getConfigInfo("class_path_src");
 
 			String sqlMapperPackage = CodeResourceUtil.getConfigInfo("sqlMapper_path");
-			String entityPackage = CodeResourceUtil.getConfigInfo("entity_path");
-			String servicePackage = CodeResourceUtil.getConfigInfo("service_path");
-			String serviceImpPackage = CodeResourceUtil.getConfigInfo("service_imp_path");
+			String entityPackage = CodeResourceUtil.getConfigInfo("entity_path")+"."+commonName;
+			String servicePackage = CodeResourceUtil.getConfigInfo("service_path")+"."+commonName;
+			String serviceImpPackage = CodeResourceUtil.getConfigInfo("service_imp_path")+"."+commonName;
+			String daoPackage = CodeResourceUtil.getConfigInfo("dao_path")+"."+commonName;
+			String daoImpPackage = daoPackage+".impl.";
 			
 			String sqlMapperPath = (new StringBuilder(String.valueOf(sqlMapperPackage.replace(".", "\\")))).append("\\")
 					.append(className).append("Mapper.xml").toString();
@@ -62,10 +65,16 @@ public class CodeGenerateFactory{
 					.append(className).append("Service.java").toString();
 			String serviceImpPath = (new StringBuilder(String.valueOf(serviceImpPackage.replace(".", "\\")))).append("\\")
 					.append(className).append("ServiceImpl.java").toString();
+			String daoPath = (new StringBuilder(String.valueOf(daoPackage.replace(".", "\\")))).append("\\")
+					.append(className).append("DAO.java").toString();
+			String daoImplPath = (new StringBuilder(String.valueOf(daoImpPackage.replace(".", "\\")))).append("\\")
+					.append(className).append("DAOImpl.java").toString();
 			String sqlMapperFlag = CodeResourceUtil.getConfigInfo("sqlMapper_flag");
 			String domainFlag = CodeResourceUtil.getConfigInfo("entity_flag");
 			String serviceFlag = CodeResourceUtil.getConfigInfo("service_flag");
 			String serviceImplFlag = CodeResourceUtil.getConfigInfo("service_imp_flag");
+			String daoFlag = CodeResourceUtil.getConfigInfo("dao_flag");
+			String daoImplFlag = CodeResourceUtil.getConfigInfo("dao_impl_flag");
 			Map<String, Object> sqlMap = createBean.getAutoCreateSql(tableName);
 			List<ColumnData> columnDatas = createBean.getColumnDatas(tableName);
 			List<ColumnData> columnKeyDatas = createBean.getColumnKeyDatas(columnDatas);
@@ -86,6 +95,8 @@ public class CodeGenerateFactory{
 			root.put("entityPackage", entityPackage);
 			root.put("servicePackage", servicePackage);
 			root.put("serviceImpPackage", serviceImpPackage);
+			root.put("daoPackage", daoPackage);
+			root.put("daoImpPackage", daoImpPackage);
 			root.put("keyType", keyType);
 			root.put("nowDate", nowDate);
 			root.put("feilds", createBean.getBeanFeilds(tableName, className));
@@ -116,6 +127,12 @@ public class CodeGenerateFactory{
 			}
 			if ("Y".equals(serviceImplFlag)){
 				FreemarkerEngine.createFileByFTL(cfg, root, "serviceImplClass.ftl", classPathSrc, serviceImpPath);
+			}
+			if ("Y".equals(daoFlag)){
+				FreemarkerEngine.createFileByFTL(cfg, root, "daoClass.ftl", classPathSrc, daoPath);
+			}
+			if ("Y".equals(daoImplFlag)){
+				FreemarkerEngine.createFileByFTL(cfg, root, "daoImplClass.ftl", classPathSrc, daoImplPath);
 			}
 			System.out.println("----------------------------"+tableNameUpper+"持久化模板代码生成完毕---------------------------");
 		} catch (Exception e1) {
