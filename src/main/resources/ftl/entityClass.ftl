@@ -8,16 +8,14 @@ import java.util.Date;
 import java.math.BigDecimal;
 </#if>
 </#list>
-import com.sankai.user.common.entity.BasicEntity;
-import com.sankai.user.service.${className}Service;
-import com.sankai.user.common.util.SpringUtils;
+import com.coding17.easycms.soa.base.entity.BasicEntity;
 
 /**
  * 描述：</b>${codeName}<br>
  * @author：系统生成
  * @version:1.0
  */
-public class ${className}Entity extends BasicEntity {
+public class ${className} extends BasicEntity {
 	private static final long serialVersionUID = 1L;
 	
 	<#list columnDatas as item>
@@ -63,19 +61,21 @@ public class ${className}Entity extends BasicEntity {
 	 */
 	@Override
     public String className() {
-        return ${className}Entity.class.getName();
+        return ${className}.class.getName();
     }
-	
-	/**
-	 * 获取service数据操作类型
-	 */
+    
+    /**
+     * 重写toString()
+     */
 	@Override
-    public ${className}Service service() {
-        return (${className}Service)SpringUtils.getBean("${lowerName}ServiceImpl");
+    public String toString() {
+    	StringBuffer tos = new StringBuffer("${className}[");
+    	<#list columnDatas as item>
+    	tos.append("${item.domainPropertyName}=").append(this.${item.domainPropertyName}).append(",");
+    	</#list>
+    	tos.append("]");
+        return tos.toString();
     }
-	
-	/*user customize code start*/
-${userCustomCode}
-	/*user customize code end*/
+    
 }
 
