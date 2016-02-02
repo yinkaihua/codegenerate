@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!-- 功能模块: ${codeName} -->
-<mapper namespace="${className}EntityMapper" >
+<mapper namespace="${className}" >
 
 	<!--通用表字段列表-->
-	<resultMap id="BaseResultMap" type="${entityPackage}.${className}Entity">
+	<resultMap id="BaseResultMap" type="${entityPackage}.${className}">
 		<#list columnDatas as item>
 		<result column="${item.columnName}" property="${item.domainPropertyName}" jdbcType="${item.jdbcDataType}"/>
 		</#list>
@@ -41,7 +41,7 @@ ${userCustomCode}
 	开发信息: 
 	处理信息: 保存记录
 	-->
- 	<insert id="insert" parameterType="${entityPackage}.${className}Entity" >
+ 	<insert id="insert" parameterType="${entityPackage}.${className}" >
  		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
 			SELECT LAST_INSERT_ID() AS id
 		</selectKey>
@@ -68,7 +68,7 @@ ${userCustomCode}
 	开发信息: 
 	处理信息: 修改记录
 	-->
- 	<update id="update" parameterType="${entityPackage}.${className}Entity" >
+ 	<update id="update" parameterType="${entityPackage}.${className}" >
 		UPDATE   ${tableNameUpper}  	 
 	  	<set> 
 		<#list columnDatas as item>
@@ -108,7 +108,7 @@ ${userCustomCode}
 	开发信息: 
 	处理信息: 修改记录
 	-->
- 	<update id="updateBak" parameterType="${entityPackage}.${className}Entity" >
+ 	<update id="updateBak" parameterType="${entityPackage}.${className}" >
 		UPDATE   ${tableNameUpper}  	 
 	  	<set> 
 		<#list columnDatas as item>
@@ -143,7 +143,7 @@ ${userCustomCode}
 	开发信息: 
 	处理信息: 删除记录
 	-->
-	<delete id="deleteByPriKey" parameterType="${entityPackage}.${className}Entity">
+	<delete id="deleteByPriKey" parameterType="${entityPackage}.${className}">
 		DELETE 	FROM ${tableNameUpper} 	 
 		WHERE 
 		<#list columnKeyDatas as item>
@@ -163,7 +163,7 @@ ${userCustomCode}
 	开发信息: 
 	处理信息: 根据主键查询记录
 	-->
-	<select id="findByPriKey" parameterType="${entityPackage}.${className}Entity"  resultMap="BaseResultMap">
+	<select id="findByPriKey" parameterType="${entityPackage}.${className}"  resultMap="BaseResultMap">
 		SELECT   
 		   <include refid="baseColumnList"/>
 		FROM   ${tableNameUpper}         
@@ -184,7 +184,7 @@ ${userCustomCode}
 	开发信息: 
 	处理信息: 分页查询记录
 	-->
-	<select id="getPagenationList" parameterType="${entityPackage}.${className}Entity"  resultMap="BaseResultMap">
+	<select id="getPagenationList" parameterType="${entityPackage}.${className}"  resultMap="BaseResultMap">
 		<!-- 分页条 -->
 		<include refid="CommonEntity.paginationPrefix"/>
 		SELECT   
@@ -205,7 +205,7 @@ ${userCustomCode}
 	开发信息: 
 	处理信息: 查询记录数
 	-->
-	<select id="getPagenationList-count" parameterType="${entityPackage}.${className}Entity" resultType="int">
+	<select id="getPagenationList-count" parameterType="${entityPackage}.${className}" resultType="int">
 		SELECT count(1)  FROM  ${tableNameUpper}     
 		 WHERE 1=1
 		<include refid="whereContation"/>
@@ -217,7 +217,7 @@ ${userCustomCode}
 	开发信息: 
 	处理信息: 根据条件查询记录
 	-->
-	<select id="getList" parameterType="${entityPackage}.${className}Entity"  resultMap="BaseResultMap">
+	<select id="getList" parameterType="${entityPackage}.${className}"  resultMap="BaseResultMap">
 	   SELECT   
 	   		<include refid="baseColumnList"/>
 	   FROM   ${tableNameUpper}           
@@ -236,7 +236,7 @@ ${userCustomCode}
 	开发信息: 
 	处理信息: 根据条件查询记录
 	-->
-	<select id="getBestMatched" parameterType="${entityPackage}.${className}Entity"  resultType="${entityPackage}.${className}Entity">
+	<select id="getBestMatched" parameterType="${entityPackage}.${className}"  resultType="${entityPackage}.${className}">
 	   SELECT   
 	   		<include refid="baseColumnList"/>
 	   FROM   ${tableNameUpper}           
