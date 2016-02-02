@@ -6,8 +6,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import ${daoPackage}.${className}DAO;
+import com.coding17.easycms.soa.base.dao.ISuperDAO;
 import com.coding17.easycms.soa.base.service.impl.BaseServiceImpl;
+import ${daoPackage}.${className}DAO;
 import ${servicePackage}.${className}Service;
 import ${entityPackage}.${className};
 
