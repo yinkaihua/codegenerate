@@ -34,6 +34,8 @@ public class CodeGenerateFactory{
 			String commonName = className.substring(1).toLowerCase();
 			String lowerName = (new StringBuilder(String.valueOf(className.substring(0, 1).toLowerCase()))).append(
 					className.substring(1, className.length())).toString();
+			String voName = (new StringBuilder(String.valueOf(commonName.substring(0, 1).toUpperCase()))).append(
+					commonName.substring(1, commonName.length())).toString();
 			String tableNameUpper = tableName.toUpperCase();
 			String tablesAsName = createBean.getTablesASName(tableName);
 			if (StringUtils.isEmpty(codeName)) {
@@ -52,10 +54,12 @@ public class CodeGenerateFactory{
 
 			String sqlMapperPackage = CodeResourceUtil.getConfigInfo("sqlMapper_path");
 			String entityPackage = CodeResourceUtil.getConfigInfo("entity_path")+"."+commonName;
+			String voPackage = CodeResourceUtil.getConfigInfo("vo_path")+"."+commonName;
 			String servicePackage = CodeResourceUtil.getConfigInfo("service_path")+"."+commonName;
 			String serviceImpPackage = servicePackage+".impl";
 			String daoPackage = CodeResourceUtil.getConfigInfo("dao_path")+"."+commonName;
 			String daoImpPackage = daoPackage+".impl";
+			String controllerPackage = CodeResourceUtil.getConfigInfo("controller_path")+"."+commonName;
 			
 			String sqlMapperPath = (new StringBuilder(String.valueOf(sqlMapperPackage.replace(".", "\\")))).append("\\")
 					.append(className).append("Mapper.xml").toString();
@@ -69,12 +73,18 @@ public class CodeGenerateFactory{
 					.append(className).append("DAO.java").toString();
 			String daoImplPath = (new StringBuilder(String.valueOf(daoImpPackage.replace(".", "\\")))).append("\\")
 					.append(className).append("DAOImpl.java").toString();
+			String voPath = (new StringBuilder(String.valueOf(voPackage.replace(".", "\\")))).append("\\")
+					.append(voName).append(".java").toString();
+			String controllerPath = (new StringBuilder(String.valueOf(controllerPackage.replace(".", "\\")))).append("\\")
+					.append(voName).append("Controller.java").toString();
 			String sqlMapperFlag = CodeResourceUtil.getConfigInfo("sqlMapper_flag");
 			String domainFlag = CodeResourceUtil.getConfigInfo("entity_flag");
 			String serviceFlag = CodeResourceUtil.getConfigInfo("service_flag");
 			String serviceImplFlag = CodeResourceUtil.getConfigInfo("service_imp_flag");
 			String daoFlag = CodeResourceUtil.getConfigInfo("dao_flag");
 			String daoImplFlag = CodeResourceUtil.getConfigInfo("dao_impl_flag");
+			String voFlag = CodeResourceUtil.getConfigInfo("vo_flag");
+			String controllerFlag = CodeResourceUtil.getConfigInfo("controller_flag");
 			Map<String, Object> sqlMap = createBean.getAutoCreateSql(tableName);
 			List<ColumnData> columnDatas = createBean.getColumnDatas(tableName);
 			List<ColumnData> columnKeyDatas = createBean.getColumnKeyDatas(columnDatas);
@@ -87,16 +97,19 @@ public class CodeGenerateFactory{
 			System.out.println((new StringBuilder("开始生成时间:")).append(nowDate).toString());
 			Map<String, Object> root = new HashMap<String, Object>();
 			root.put("className", className);
+			root.put("voName", voName);
 			root.put("lowerName", lowerName);
 			root.put("codeName", codeName);
 			root.put("tableName", tableName);
 			root.put("tableNameUpper", tableNameUpper);
 			root.put("tablesAsName", tablesAsName);
 			root.put("entityPackage", entityPackage);
+			root.put("voPackage", voPackage);
 			root.put("servicePackage", servicePackage);
 			root.put("serviceImpPackage", serviceImpPackage);
 			root.put("daoPackage", daoPackage);
 			root.put("daoImpPackage", daoImpPackage);
+			root.put("controllerPackage", controllerPackage);
 			root.put("keyType", keyType);
 			root.put("nowDate", nowDate);
 			root.put("feilds", createBean.getBeanFeilds(tableName, className));
@@ -133,6 +146,12 @@ public class CodeGenerateFactory{
 			}
 			if ("Y".equals(daoImplFlag)){
 				FreemarkerEngine.createFileByFTL(cfg, root, "daoImplClass.ftl", classPathSrc, daoImplPath);
+			}
+			if ("Y".equals(voFlag)) {
+				FreemarkerEngine.createFileByFTL(cfg, root, "voClass.ftl", classPathSrc, voPath);
+			}
+			if ("Y".equals(controllerFlag)) {
+				FreemarkerEngine.createFileByFTL(cfg, root, "controllerClass.ftl", classPathSrc, controllerPath);
 			}
 			System.out.println("----------------------------"+tableNameUpper+"持久化模板代码生成完毕---------------------------");
 		} catch (Exception e1) {
