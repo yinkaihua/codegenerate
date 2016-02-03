@@ -28,9 +28,9 @@ ${userCustomCode}
 	<sql id="baseColumnList">
 		<#list columnDatas as item>
 			<#if item_index==0>
-			 ${item.columnName}		 
+			 `${item.columnName}`	 
 			<#else>
-			,${item.columnName}		 
+			,`${item.columnName}`
 			</#if>
 		</#list> 	
 	</sql>
