@@ -179,12 +179,12 @@ ${userCustomCode}
 	</#if>
 	
 	<!--
-	方法名称: getPagenationList
+	方法名称: selectListByPagination
 	调用路径: ${className}EntityMapper.getPagenationList
 	开发信息: 
 	处理信息: 分页查询记录
 	-->
-	<select id="getPagenationList" parameterType="${entityPackage}.${className}"  resultMap="BaseResultMap">
+	<select id="selectListByPagination" parameterType="${entityPackage}.${className}"  resultMap="BaseResultMap">
 		<!-- 分页条 -->
 		<include refid="CommonEntity.paginationPrefix"/>
 		SELECT   
@@ -200,12 +200,12 @@ ${userCustomCode}
 	</select>
 	
 	<!--
-	方法名称: getPagenationList-count
+	方法名称: selectCountByCondition
 	调用路径: ${className}EntityMapper.getPagenationList-count
 	开发信息: 
 	处理信息: 查询记录数
 	-->
-	<select id="getPagenationList-count" parameterType="${entityPackage}.${className}" resultType="int">
+	<select id="selectCountByCondition" parameterType="${entityPackage}.${className}" resultType="int">
 		SELECT count(1)  FROM  ${tableNameUpper}     
 		 WHERE 1=1
 		<include refid="whereContation"/>
@@ -217,7 +217,7 @@ ${userCustomCode}
 	开发信息: 
 	处理信息: 根据条件查询记录
 	-->
-	<select id="getList" parameterType="${entityPackage}.${className}"  resultMap="BaseResultMap">
+	<select id="selectListByCondition" parameterType="${entityPackage}.${className}"  resultMap="BaseResultMap">
 	   SELECT   
 	   		<include refid="baseColumnList"/>
 	   FROM   ${tableNameUpper}           
