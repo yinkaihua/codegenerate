@@ -192,8 +192,8 @@ ${userCustomCode}
 		FROM   ${tableNameUpper}          
 		WHERE 1=1
 		 	<include refid="whereContation"/>
-		 	<if test="columnSort != null">
-		 	ORDER BY ${"$"}{columnSort}
+		 	<if test="orderby != null">
+		 	ORDER BY ${"$"}{orderby}
 		 	</if>
 		<!-- 分页条 -->
 		<include refid="CommonEntity.paginationSuffix"/>
@@ -223,8 +223,8 @@ ${userCustomCode}
 	   FROM   ${tableNameUpper}           
 	   WHERE 1=1
 		<include refid="whereContation"/>
-		<if test="columnSort != null">
-		 	ORDER BY ${"$"}{columnSort}
+		<if test="orderby != null">
+		 	ORDER BY ${"$"}{orderby}
 		</if>
 		limit 0,100
 	</select>
