@@ -19,7 +19,7 @@ ${userCustomCode}
 	<sql id="whereContation">
 		<#list columnDatas as item>
 			<if test="${item.domainPropertyName} != null">
-				AND  ${item.columnName}=${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}  
+				AND  `${item.columnName}`=${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}  
 			</if>
 		</#list>
 	</sql>
@@ -49,7 +49,7 @@ ${userCustomCode}
 	 		<trim prefix="(" suffix=")" suffixOverrides=",">
 				<#list columnDatas as item>
 					<if test="${item.domainPropertyName} != null">
-					${item.columnName},
+					`${item.columnName}`,
 					</if>
 				</#list>
 			</trim>
@@ -75,11 +75,11 @@ ${userCustomCode}
 			<#if item.columnKey !='PRI' >
 				<#if item.columnName == 'LAST_UPDATE_NO'>
 				<if test="${item.domainPropertyName} != null">
-			 		${item.columnName} = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}+1,
+			 		`${item.columnName}` = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}+1,
 			 	</if>
 				<#else>
 				<if test="${item.domainPropertyName} != null">
-			 		${item.columnName} = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}},
+			 		`${item.columnName}` = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}},
 			 	</if>
 			 	</#if>
 			</#if>
@@ -88,15 +88,15 @@ ${userCustomCode}
 		WHERE  
 		<#list columnKeyDatas as item>
 			<#if item_index==0>
-			${item.columnName} = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}		 
+			`${item.columnName}` = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}		 
 			<#else>
-		 	AND ${item.columnName} = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}		 
+		 	AND `${item.columnName}` = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}		 
 			</#if>
 		</#list>
 		<#list columnDatas as item>
 			<#if item.columnName == 'LAST_UPDATE_NO'>
 		<if test="${item.domainPropertyName} != null">
-	 		AND ${item.columnName} = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}  
+	 		AND `${item.columnName}` = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}  
 	 	</if>
 		 	</#if>
 		</#list>
@@ -114,9 +114,9 @@ ${userCustomCode}
 		<#list columnDatas as item>
 			<#if item.columnKey !='PRI' >
 				<#if item.columnName == 'LAST_UPDATE_NO'>
-			 		${item.columnName} = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}+1,
+			 		`${item.columnName}` = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}+1,
 				<#else>
-			 		${item.columnName} = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}},
+			 		`${item.columnName}` = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}},
 			 	</#if>
 			</#if>
 		</#list>
@@ -124,14 +124,14 @@ ${userCustomCode}
 		WHERE  
 		<#list columnKeyDatas as item>
 			<#if item_index==0>
-			${item.columnName} = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}		 
+			`${item.columnName}` = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}		 
 			<#else>
-		 	AND ${item.columnName} = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}		 
+		 	AND `${item.columnName}` = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}		 
 			</#if>
 		</#list>
 		<#list columnDatas as item>
 			<#if item.columnName == 'LAST_UPDATE_NO'>
-	 		AND ${item.columnName} = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}  
+	 		AND `${item.columnName}` = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}  
 		 	</#if>
 		</#list>
 	</update>
@@ -148,9 +148,9 @@ ${userCustomCode}
 		WHERE 
 		<#list columnKeyDatas as item>
 			<#if item_index==0>
-			${item.columnName} = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}		 
+			`${item.columnName}` = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}		 
 			<#else>
-		 	AND ${item.columnName} = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}		 
+		 	AND `${item.columnName}` = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}		 
 			</#if>
 		</#list>
 	</delete>
@@ -170,9 +170,9 @@ ${userCustomCode}
 		WHERE
 		<#list columnKeyDatas as item>
 				<#if item_index==0>
-				${item.columnName} = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}		 
+				`${item.columnName}` = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}		 
 				<#else>
-			 	AND ${item.columnName} = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}		 
+			 	AND `${item.columnName}` = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}		 
 				</#if>
 		</#list>
 	</select>
@@ -243,9 +243,9 @@ ${userCustomCode}
 	   WHERE ROWNUM=1
 	   <#list columnKeyDatas as item>
 			<#if item.columnName=='PRODUCT_ID' || item.columnName=='ACCOUNT_TYPE_ID'>
-			AND (${item.columnName}='~~~~' OR ${item.columnName}=${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}})
+			AND (`${item.columnName}`='~~~~' OR `${item.columnName}`=${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}})
 			<#else>
-			AND ${item.columnName} = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}
+			AND `${item.columnName}` = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}
 			</#if>
 		</#list>
 	 	ORDER BY PRODUCT_ID,ACCOUNT_TYPE_ID
@@ -264,7 +264,7 @@ ${userCustomCode}
 	 	INSERT  INTO  ${tableNameUpper}
 	 		<trim prefix="(" suffix=")" suffixOverrides=",">
 				<#list columnDatas as item>
-					${item.columnName},
+					`${item.columnName}`,
 				</#list>
 			</trim>
 			values
@@ -293,11 +293,11 @@ ${userCustomCode}
 			<#if item.columnKey !='PRI' >
 				<#if item.columnName == 'LAST_UPDATE_NO'>
 				<if test="${item.domainPropertyName} != null">
-			 		${item.columnName} = ${"#"}{entity.${item.domainPropertyName},jdbcType=${item.jdbcDataType}}+1,
+			 		`${item.columnName}` = ${"#"}{entity.${item.domainPropertyName},jdbcType=${item.jdbcDataType}}+1,
 			 	</if>
 				<#else>
 				<if test="${item.domainPropertyName} != null">
-			 		${item.columnName} = ${"#"}{entity.${item.domainPropertyName},jdbcType=${item.jdbcDataType}},
+			 		`${item.columnName}` = ${"#"}{entity.${item.domainPropertyName},jdbcType=${item.jdbcDataType}},
 			 	</if>
 			 	</#if>
 			</#if>
@@ -306,15 +306,15 @@ ${userCustomCode}
 		WHERE  
 		<#list columnKeyDatas as item>
 			<#if item_index==0>
-			${item.columnName} = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}		 
+			`${item.columnName}` = ${"#"}{${item.domainPropertyName},jdbcType=${item.jdbcDataType}}		 
 			<#else>
-		 	AND ${item.columnName} = ${"#"}{entity.${item.domainPropertyName},jdbcType=${item.jdbcDataType}}		 
+		 	AND `${item.columnName}` = ${"#"}{entity.${item.domainPropertyName},jdbcType=${item.jdbcDataType}}		 
 			</#if>
 		</#list>
 		<#list columnDatas as item>
 			<#if item.columnName == 'LAST_UPDATE_NO'>
 		<if test="${item.domainPropertyName} != null">
-	 		AND ${item.columnName} = ${"#"}{entity.${item.domainPropertyName},jdbcType=${item.jdbcDataType}}  
+	 		AND `${item.columnName}` = ${"#"}{entity.${item.domainPropertyName},jdbcType=${item.jdbcDataType}}  
 	 	</if>
 		 	</#if>
 		</#list>
