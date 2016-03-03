@@ -34,8 +34,9 @@ public class CodeGenerateFactory{
 			String commonName = className.substring(1).toLowerCase();
 			String lowerName = (new StringBuilder(String.valueOf(className.substring(0, 1).toLowerCase()))).append(
 					className.substring(1, className.length())).toString();
-			String voName = (new StringBuilder(String.valueOf(commonName.substring(0, 1).toUpperCase()))).append(
-					commonName.substring(1, commonName.length())).toString();
+			/*String voName = (new StringBuilder(String.valueOf(commonName.substring(0, 1).toUpperCase()))).append(
+					commonName.substring(1, commonName.length())).toString();*/
+			String voName = className.substring(1);
 			String tableNameUpper = tableName.toUpperCase();
 			String tablesAsName = createBean.getTablesASName(tableName);
 			if (StringUtils.isEmpty(codeName)) {
